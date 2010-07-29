@@ -6,7 +6,7 @@ Requires at least: 3.0
 Tested up to: 3.0
 Stable tag: 1.0
 
-This plugin lets you create announcements that are displayed in various places of your WordPress installation.
+This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
 
@@ -29,6 +29,7 @@ The administration section of Ninja Announcements makes it very easy to add and 
 are not automatically deleted, but simply deactivated so that they can be edited later. Of course, these can just be deleted if you want.
 
 Features:
+
 	* Use multiple announcements, each with its own settings.
 	* Choose from three different announcement placements: Header, Widget or Manual.
 	* Schedule announcements by date and/or hour so that they only show for a certain time period.
@@ -36,6 +37,16 @@ Features:
 	* Insert images or videos into announcements from your WordPress Media Library, just like you would a post.
 	* Since it uses the built-in WordPress rich text editor and media gallery, it has a small footprint.
 
+	
+== Screenshots ==
+
+1. Ninja Announcements - Main Administration Panel
+2. Ninja Announcements - New Announcement
+3. Ninja Announcements - Editing An Announcement
+4. Ninja Announcements - Default Display Position
+5. Ninja Announcements - Custom Display Position
+6. Ninja Announcements - Sidebar/Widget Display Position
+	
 == Installation ==
 
 Installing Ninja Announcements is really simple. 
