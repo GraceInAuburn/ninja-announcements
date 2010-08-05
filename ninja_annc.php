@@ -33,7 +33,7 @@ We need to do a few things:
 */
 
 function ninja_annc_display_css(){
-	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja_annc/css/ninja_annc_display.css' );
+	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_display.css' );
 }
 
 function ninja_annc_display($ninja_annc_id){
@@ -135,14 +135,14 @@ function ninja_annc_scripts() {
 	wp_register_script( 'jquery-ui-core', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js');
 
 	//Plugin_url is passed on to our javascript file so that we can determine the plugin directory regardless of where it is.
-	$plugin_url = WP_PLUGIN_URL.'/ninja_annc';
+	$plugin_url = WP_PLUGIN_URL.'/ninja-announcements';
 	//Wonky work around because I couldn't figure out how to locate the wp-admin folder. Simply gets the content url and replaces wp-content with our full page url.
 	//This should be changed as soon as I figure out how to actually point to the wp-admin directory.
 	$wp_content_url = WP_CONTENT_URL;
 	$admin_url = str_replace("wp-content", "wp-admin/options-general.php?page=ninja-annc-options", $wp_content_url);
 	
 	wp_enqueue_script('ninja-annc-js',
-		WP_PLUGIN_URL . '/ninja_annc/js/ninja-annc-js.php?plugin_url='.$plugin_url.'&admin_url='.$admin_url,
+		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-js.php?plugin_url='.$plugin_url.'&admin_url='.$admin_url,
 		array('jquery', 'jquery-ui-core'));
 
 	
@@ -170,8 +170,8 @@ function ninja_annc_scripts() {
 
 //Include all of our necessary CSS files.
 function ninja_annc_styles(){
-	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja_annc/css/ninja_annc_admin.css' );
-	wp_enqueue_style( 'jquery-ui-css', WP_PLUGIN_URL.'/ninja_annc/css/flick/jquery-ui-1.7.3.custom.css' );
+	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_admin.css' );
+	wp_enqueue_style( 'jquery-ui-css', WP_PLUGIN_URL.'/ninja-announcements/css/flick/jquery-ui-1.7.3.custom.css' );
 }
 //END load scripts and styles
 
@@ -649,9 +649,9 @@ if (function_exists('ninja_annc_display')) {
 					echo '<tr class="'.$ninja_annc_class.'">';
 					echo '<td>';
 					if($ninja_annc_class == 'inactive'){
-						echo '<span class="active"><a href="'.WP_PLUGIN_URL.'/ninja_annc/include/process.php?action=activate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-activate" id="ninja-annc-activate-'.$ninja_annc_id.'">Activate</a></span>';
+						echo '<span class="active"><a href="'.WP_PLUGIN_URL.'/ninja-announcements/include/process.php?action=activate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-activate" id="ninja-annc-activate-'.$ninja_annc_id.'">Activate</a></span>';
 					}else{
-						echo '<span class="deactivate"><a href="'.WP_PLUGIN_URL.'/ninja_annc/include/process.php?action=deactivate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-deactivate" id="ninja-annc-deactivate-'.$ninja_annc_id.'">Deactivate</a></span>';
+						echo '<span class="deactivate"><a href="'.WP_PLUGIN_URL.'/ninja-announcements/include/process.php?action=deactivate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-deactivate" id="ninja-annc-deactivate-'.$ninja_annc_id.'">Deactivate</a></span>';
 					}
 					echo ' | <span class="edit"><a href="'.$edit_url.'" class="ninja-annc-edit" id="ninja-annc-edit-'.$ninja_annc_id.'">Edit</a></span>';
 					echo ' | <span class="delete"><a href="#" class="ninja-annc-delete" id="ninja-annc-delete-'.$ninja_annc_id.'">Delete</a></span></td>';
