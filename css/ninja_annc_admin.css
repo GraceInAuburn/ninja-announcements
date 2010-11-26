@@ -1,26 +1,26 @@
-#ninja_annc_function {
-  background:#FFFFCC;
-  padding: 3px 0;
-  color:#990000;
-  border:1px solid #999;
-  overflow:hidden;
-  text-align:center;
-}
-
-#ninja_annc_options_general {
-background:url("ninja_admin_img/head-ico.png") no-repeat;
-}
-
-#ninja_annc_options_new {
-background:url("ninja_admin_img/swords-ico.png") no-repeat;
-}
-
-#ninja_annc_options_edit {
-background:url("ninja_admin_img/fist-ico.png") no-repeat;
-}
-.icon32 {
-float:left;
-height:36px;
-margin:14px 6px 0 0;
-width:36px;
+#ninja_annc_function {
+  background:#FFFFCC;
+  padding: 3px 0;
+  color:#990000;
+  border:1px solid #999;
+  overflow:hidden;
+  text-align:center;
+}
+
+#ninja_annc_options_general {
+background:url("ninja_admin_img/head-ico.png") no-repeat;
+}
+
+#ninja_annc_options_new {
+background:url("ninja_admin_img/swords-ico.png") no-repeat;
+}
+
+#ninja_annc_options_edit {
+background:url("ninja_admin_img/fist-ico.png") no-repeat;
+}
+.icon32 {
+float:left;
+height:36px;
+margin:14px 6px 0 0;
+width:36px;
 }

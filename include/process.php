@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../../../../wp-config.php');
 include_once('../../../../wp-load.php');
 include_once('../../../../wp-includes/wp-db.php');
@@ -36,6 +37,10 @@ if($_REQUEST['action'] == 'delete'){
 	header('Location: '.$previous_page);
 }
 
-
+if($_REQUEST['action'] == 'close'){
+	$annc_id = $_REQUEST['annc_id'];
+	$_SESSION['ninja_annc_'.$annc_id] = 'closed';
+	echo $_SESSION['ninja_annc_'.$annc_id];
+}
 
 ?>

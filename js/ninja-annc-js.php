@@ -7,6 +7,7 @@ $plugin_url = $plugin_url.'/include';
 	jQuery(document).ready(function($) {
 
 	$(".ninja-annc-delete").live('click', function(event){
+		//alert('hi');
 		event.preventDefault();
 		var ninja_annc_id = this.id.replace('ninja-annc-delete-', '');
 		var really_delete= confirm("Delete this announcement? This is irreversible!");
@@ -66,6 +67,5 @@ $plugin_url = $plugin_url.'/include';
 			$("#endtimeampm").css({"background-color": "white"});
 			
 		}
-	});
-	
+	});	
 });

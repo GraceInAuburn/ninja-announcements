@@ -4,7 +4,7 @@ Plugin Name: Ninja Announcements
 Plugin URI: http://plugins.wpninjas.net?p=9
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: Kevin Stover
-Version: 1.0
+Version: 1.1
 Author URI: http://wpninjas.net
 */
 
@@ -31,7 +31,7 @@ We need to do a few things:
 	2)Check to see if that announcement is scheduled to happen today
 	3)Update the database to deactivate past-due announcements.
 */
-
+session_start();
 function ninja_annc_display_css(){
 	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_display.css' );
 }
@@ -39,13 +39,15 @@ function ninja_annc_display_css(){
 function ninja_annc_display($ninja_annc_id){
 	global $wpdb;
 	//$wpdb->show_errors();
-	
+	if($ninja_annc_id['id']){
+		$ninja_annc_id = $ninja_annc_id['id'];
+	}
 	//Figure out our tablename. We grab the WordPress prefix and attach our plugin's suffix.
 	$ninja_annc_table_name = $wpdb->prefix . "ninja_annc";
 	//Include our plugin css file.
 
 	//Grab all the active announcements in the database.
-	$ninja_annc_row = $wpdb->get_row( "SELECT * FROM $ninja_annc_table_name WHERE active = 1 AND id = ".$ninja_annc_id, ARRAY_A);
+	$ninja_annc_row = $wpdb->get_row( "SELECT * FROM ".$ninja_annc_table_name." WHERE active = 1 AND id = ".$ninja_annc_id, ARRAY_A);
 
 	//We need to compare dates, so let's figure out what today is.
 	$ninja_annc_today = current_time("timestamp");
@@ -60,7 +62,9 @@ function ninja_annc_display($ninja_annc_id){
 	if($ninja_annc_active == 1){
 		if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){ //We only want to continue if our enddate hasn't happened yet OR our enddate is 0. An enddate of 0 indicates that this is an unscheduled announcement.
 			if($ninja_annc_begindate <= $ninja_annc_today || $ninja_annc_begindate == 0){ //Only continue if we have passed the begindate OR the begindate is 0.
-				echo "<div id='ninja_annc_container_".$ninja_annc_id."' class='ninja_annc_container'><div id='ninja_annc_".$ninja_annc_id."' class='ninja_annc'>".$ninja_annc_message."</div></div>"; //Our actual output line.
+				if($_SESSION['ninja_annc_'.$ninja_annc_id] != 'closed'){
+					echo "<div id='ninja_annc_container_".$ninja_annc_id."' class='ninja_annc_container'><div id='ninja_annc_".$ninja_annc_id."' class='ninja_annc'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='close_ninja_annc_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
+				}
 			}
 		}else{ //Today is past the enddate of our scheduled announcement, let's deactivate it.
 			//Update our database to deactivate this announcement.
@@ -93,7 +97,44 @@ function ninja_annc_default_display(){
 		
 		if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){ //We only want to continue if our enddate hasn't happened yet OR our enddate is 0. An enddate of 0 indicates that this is an unscheduled announcement.
 			if($ninja_annc_begindate <= $ninja_annc_today || $ninja_annc_begindate == 0){ //Only continue if we have passed the begindate OR the begindate is 0.
-				echo "<div id='ninja_annc_container_".$ninja_annc_id."' class='ninja_annc_container'><div id='ninja_annc_".$ninja_annc_id."' class='ninja_annc'>".$ninja_annc_message."</div></div>"; //Our actual output line.
+				if($_SESSION['ninja_annc_'.$ninja_annc_id] != 'closed'){
+					echo "<div id='ninja_annc_container_".$ninja_annc_id."' class='ninja_annc_container'><div id='ninja_annc_".$ninja_annc_id."' class='ninja_annc'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='close_ninja_annc_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
+				}
+			}
+		}else{ //Today is past the enddate of our scheduled announcement, let's deactivate it.
+			//Update our database to deactivate this announcement.
+			$wpdb->update( $ninja_annc_table_name, array( 'active' => 0), array( 'id' => $ninja_annc_id ));
+		}
+	}
+}
+
+function ninja_annc_display_all(){
+	global $wpdb;
+	//$wpdb->show_errors();
+	
+	//Figure out our tablename. We grab the WordPress prefix and attach our plugin's suffix.
+	$ninja_annc_table_name = $wpdb->prefix . "ninja_annc";
+	//Include our plugin css file.
+
+	//Grab all the active announcements in the database.
+	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM ".$ninja_annc_table_name." WHERE active = 1", ARRAY_A);
+	//We need to compare dates, so let's figure out what today is.
+	$ninja_annc_today = current_time("timestamp");
+	
+	foreach($ninja_annc_rows as $row){ //Steps through each of our row results.
+		
+		//Assign php variables to each of our database values.
+		$ninja_annc_id = $row['id'];
+		$ninja_annc_message = $row['message'];
+		$ninja_annc_active = $row['active'];
+		$ninja_annc_begindate = $row['begindate'];
+		$ninja_annc_enddate = $row['enddate'];
+		
+		if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){ //We only want to continue if our enddate hasn't happened yet OR our enddate is 0. An enddate of 0 indicates that this is an unscheduled announcement.
+			if($ninja_annc_begindate <= $ninja_annc_today || $ninja_annc_begindate == 0){ //Only continue if we have passed the begindate OR the begindate is 0.
+				if($_SESSION['ninja_annc_'.$ninja_annc_id] != 'closed'){
+					echo "<div id='ninja_annc_container_".$ninja_annc_id."' class='ninja_annc_container'><div id='ninja_annc_".$ninja_annc_id."' class='ninja_annc'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='close_ninja_annc_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
+				}
 			}
 		}else{ //Today is past the enddate of our scheduled announcement, let's deactivate it.
 			//Update our database to deactivate this announcement.
@@ -105,6 +146,16 @@ function ninja_annc_default_display(){
 
 add_action("get_header", "ninja_annc_display_css");
 add_action("wp_head", "ninja_annc_default_display");
+
+function ninja_display_js(){
+	$plugin_url = WP_PLUGIN_URL.'/ninja-announcements';
+	wp_enqueue_script('ninja-annc-display',
+		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-display-js.php?plugin_url='.$plugin_url,
+		array('jquery', 'jquery-ui-core'));
+}
+add_action("init", "ninja_display_js");
+
+add_shortcode("ninja_annc", "ninja_annc_display");
 
 /*
 ----- End Output Section
@@ -706,7 +757,7 @@ function ninja_annc_widget($vars) {
 	
 	if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){ //We only want to continue if our enddate hasn't happened yet OR our enddate is 0. An enddate of 0 indicates that this is an unscheduled announcement.
 		if($ninja_annc_begindate <= $ninja_annc_today || $ninja_annc_begindate == 0){ //Only continue if we have passed the begindate OR the begindate is 0.
-			echo "<div id='ninja_annc_widget_container_".$ninja_annc_id."' class='ninja_annc_widget_container'><div id='ninja_annc_widget_".$ninja_annc_id."' class='ninja_annc_widget'>".$ninja_annc_message."</div></div>"; //Our actual output line.
+			echo "<div id='ninja_annc_widget_container_".$ninja_annc_id."' class='ninja_annc_widget_container'><div id='ninja_annc_widget_".$ninja_annc_id."' class='ninja_annc_widget'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='ninja_annc_widget_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
 		}
 	}else{ //Today is past the enddate of our scheduled announcement, let's deactivate it.
 		//Update our database to deactivate this announcement.
