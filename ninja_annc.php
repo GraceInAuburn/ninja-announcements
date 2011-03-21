@@ -757,7 +757,7 @@ function ninja_annc_widget($vars) {
 	
 	if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){ //We only want to continue if our enddate hasn't happened yet OR our enddate is 0. An enddate of 0 indicates that this is an unscheduled announcement.
 		if($ninja_annc_begindate <= $ninja_annc_today || $ninja_annc_begindate == 0){ //Only continue if we have passed the begindate OR the begindate is 0.
-			echo "<div id='ninja_annc_widget_container_".$ninja_annc_id."' class='ninja_annc_widget_container'><div id='ninja_annc_widget_".$ninja_annc_id."' class='ninja_annc_widget'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='ninja_annc_widget_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
+			echo "<div id='ninja_annc_widget_container_".$ninja_annc_id."' class='ninja_annc_widget_container'><div id='ninja_annc_widget_".$ninja_annc_id."' class='ninja_annc_widget'>".$ninja_annc_message."</div><span class='ninja_annc_close' id='close_ninja_annc_widget_container_".$ninja_annc_id."'><a href='#'>[close]</a></span></div>"; //Our actual output line.
 		}
 	}else{ //Today is past the enddate of our scheduled announcement, let's deactivate it.
 		//Update our database to deactivate this announcement.

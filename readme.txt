@@ -4,7 +4,7 @@ Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 1.1
+Stable tag: 1.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
@@ -121,3 +121,6 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 * Added a "close" button to each announcement. This allows the user to close each for the rest of their browsing session
 * Inclusion of a shortcode allows you to easily place an announcement on a page or post. [ninja_annc id=3]
 * Added a new function for template designers that allows you to show all active announcements.
+
+= 1.2 =
+* Fixed some minor bugs. One dealing with HTML validation and another with security issues.
