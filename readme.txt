@@ -1,5 +1,5 @@
 === Ninja Announcements ===
-Contributors: Kevin Stover, James Laws
+Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
