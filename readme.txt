@@ -1,9 +1,9 @@
 === Ninja Announcements ===
-Contributors: Kevin Stover, James Laws
+Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
-Tested up to: 3.0
+Tested up to: 3.1
 Stable tag: 1.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
