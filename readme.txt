@@ -3,12 +3,14 @@ Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
-Tested up to: 3.0
-Stable tag: 1.0
+Tested up to: 3.1
+Stable tag: 1.2.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
+
+Version 1.2.2 Fixes a major bug that some users were experiencing. This bug caused the announcement editor to appear all white. Please download the new version.
 
 The Ninja Announcements plugin displays small portions of text and/or images/video on pages and posts. Generally, these
 are used to let your visitors know about something special. They can be scheduled so that they are only displayed 
@@ -36,6 +38,9 @@ Features:
 	* Edit announcements using the same rich text editor as a WordPress post.
 	* Insert images or videos into announcements from your WordPress Media Library, just like you would a post.
 	* Since it uses the built-in WordPress rich text editor and media gallery, it has a small footprint.
+	* NEW for 1.1 - Users are able to close the announcement for the rest of their browsing session
+	* NEW for 1.1 - Inclusion of a shortcode allows you to easily place an announcement on a page or post.
+	* NEW for 1.1 - A new function for template designers that allows you to show all active announcements.
 
 	
 == Screenshots ==
@@ -71,7 +76,11 @@ to call within your template file. The function will show the desired announceme
 As each announcement has its own, slightly different, function, you'll have to set the location to "Manual (Function)" and
 save your changes before you are given the php code.
 
-(To see examples and screenshots of each of these uses, please visit http://wpninjas.net)
+NEW for 1.1:
+* You can add any announcement to your posts or pages by using the shortcode [ninja_annc id=2] (where 2 is the id of the announcement you want to display).
+* Template designers can now call the function: ninja_annc_display_all(); This will display all active announcements in one location.
+
+(To see examples and screenshots of each of these uses, please visit http://www.wpninjas.net/plugins)
 
 
 == Advanced Styling ==
@@ -82,6 +91,7 @@ so by styling the id of the container div. This div will always have an id of: n
 This id number can be found at the top of each announcement's edit page. We highly recommend that you change this in your own stylesheet, 
 as future versions of this plugin will likely overwrite the display css file. 
 
+For a more detailed explaination of styling your announcements and the close button, please visit: http://plugins.wpninjas.net
 
 == Help / Bugs ==
 
@@ -108,3 +118,14 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 
 = 1.0 =
 * First version of Ninja Announcements released.
+
+= 1.1 =
+* Added a "close" button to each announcement. This allows the user to close each for the rest of their browsing session
+* Inclusion of a shortcode allows you to easily place an announcement on a page or post. [ninja_annc id=3]
+* Added a new function for template designers that allows you to show all active announcements.
+
+= 1.2 =
+* Fixed some minor bugs. One dealing with HTML validation and another with security issues.
+
+= 1.2.2 =
+* Fixed a major bug for some users that caused the announcement editor to appear as an all-white box.
