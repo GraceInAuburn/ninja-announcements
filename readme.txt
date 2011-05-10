@@ -4,11 +4,13 @@ Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
 Tested up to: 3.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
+
+Version 1.2.2 Fixes a major bug that some users were experiencing. This bug caused the announcement editor to appear all white. Please download the new version.
 
 The Ninja Announcements plugin displays small portions of text and/or images/video on pages and posts. Generally, these
 are used to let your visitors know about something special. They can be scheduled so that they are only displayed 
@@ -78,7 +80,7 @@ NEW for 1.1:
 * You can add any announcement to your posts or pages by using the shortcode [ninja_annc id=2] (where 2 is the id of the announcement you want to display).
 * Template designers can now call the function: ninja_annc_display_all(); This will display all active announcements in one location.
 
-(To see examples and screenshots of each of these uses, please visit http://plugins.wpninjas.net)
+(To see examples and screenshots of each of these uses, please visit http://www.wpninjas.net/plugins)
 
 
 == Advanced Styling ==
@@ -124,3 +126,6 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 
 = 1.2 =
 * Fixed some minor bugs. One dealing with HTML validation and another with security issues.
+
+= 1.2.2 =
+* Fixed a major bug for some users that caused the announcement editor to appear as an all-white box.
