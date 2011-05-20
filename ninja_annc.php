@@ -196,7 +196,7 @@ function ninja_annc_scripts() {
 		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-js.php?plugin_url='.$plugin_url.'&admin_url='.$admin_url,
 		array('jquery', 'jquery-ui-core'));
 
-	/*
+	
 	//Load our javascripts for the tinyMCE editor.
 	remove_all_filters('mce_external_plugins');
 	wp_enqueue_script('common');
@@ -211,12 +211,12 @@ function ninja_annc_scripts() {
 	wp_print_scripts('editor');
 	wp_print_scripts('editor-functions');
 	add_thickbox();
-	wp_tiny_mce();
+	//wp_tiny_mce();
 	wp_admin_css();
 	wp_enqueue_script('utils');
 	do_action("admin_print_styles-post-php");
 	do_action('admin_print_styles');
-	*/
+	
 
 }
 
