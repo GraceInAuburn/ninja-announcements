@@ -4,7 +4,7 @@ Plugin Name: Ninja Announcements
 Plugin URI: http://plugins.wpninjas.net?p=9
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: Kevin Stover
-Version: 1.2.2
+Version: 1.2.3
 Author URI: http://wpninjas.net
 */
 
@@ -196,7 +196,7 @@ function ninja_annc_scripts() {
 		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-js.php?plugin_url='.$plugin_url.'&admin_url='.$admin_url,
 		array('jquery', 'jquery-ui-core'));
 
-	
+	/*
 	//Load our javascripts for the tinyMCE editor.
 	remove_all_filters('mce_external_plugins');
 	wp_enqueue_script('common');
@@ -216,7 +216,7 @@ function ninja_annc_scripts() {
 	wp_enqueue_script('utils');
 	do_action("admin_print_styles-post-php");
 	do_action('admin_print_styles');
-	
+	*/
 
 }
 
@@ -232,6 +232,7 @@ function ninja_annc_styles(){
 function ninja_annc_options() {
 
 	global $wpdb;
+
 	$wp_content_url = WP_CONTENT_URL;
 	$admin_url = str_replace("wp-content", "wp-admin/options-general.php?page=ninja-annc-options", $wp_content_url);
 
@@ -324,6 +325,12 @@ function ninja_annc_options() {
 		//$ninja_annc_begindate = $ninja_annc_begindate.' '.$ninja_annc_begintimehr.':'.$ninja_annc_begintimemin.$ninja_annc_begintimeampm;
 		
 		//echo $ninja_annc_begindate;
+		wp_tiny_mce( false,  // true makes the editor "teeny"
+		array(
+			"theme_advanced_path" => false
+		)
+		);
+		wp_tiny_mce_preload_dialogs();
 		?>
         <div class="wrap">
 	<div id="ninja_annc_options_edit" class="icon32"><br></div>
