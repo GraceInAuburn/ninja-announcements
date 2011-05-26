@@ -1,9 +1,3 @@
-<?php
-$plugin_url = $_REQUEST['plugin_url'];
-$admin_url = $_REQUEST['admin_url'];
-$plugin_url = $plugin_url.'/include';
-?>	
-
 	jQuery(document).ready(function($) {
 
 	$(".ninja-annc-delete").live('click', function(event){
@@ -12,12 +6,42 @@ $plugin_url = $plugin_url.'/include';
 		var ninja_annc_id = this.id.replace('ninja-annc-delete-', '');
 		var really_delete= confirm("Delete this announcement? This is irreversible!");
 		if (really_delete== true){
-			window.location = "<?php echo $plugin_url;?>/process.php?action=delete&ninja_annc_id=" + ninja_annc_id;	
+			$.post(ajaxurl, {ninja_annc_id:ninja_annc_id, action:"wpnj_delete_annc"}, function(data){
+				$("#tr_" + ninja_annc_id).remove();
+			});
 		}		
+	});	
+	$(".ninja-annc-activate").live('click', function(event){
+		//alert('hi');
+		event.preventDefault();
+		var ninja_annc_id = this.id.replace('ninja-annc-activate-', '');
+		$.post(ajaxurl, {ninja_annc_id:ninja_annc_id, action:"wpnj_activate_annc"}, function(data){
+			//alert('activated');
+			$("#ninja-annc-activate-" + ninja_annc_id).removeClass('ninja-annc-activate');
+			$("#ninja-annc-activate-" + ninja_annc_id).addClass('ninja-annc-deactivate');
+			$("#ninja-annc-activate-" + ninja_annc_id).attr('id', 'ninja-annc-deactivate-' + ninja_annc_id);
+			$("#tr_" + ninja_annc_id).removeClass('inactive');
+			$("#tr_" + ninja_annc_id).addClass('active');
+			$("#active_" + ninja_annc_id).attr("innerHTML", "Deactivate");
+		});
+	});	
+	$(".ninja-annc-deactivate").live('click', function(event){
+		event.preventDefault();
+		var ninja_annc_id = this.id.replace('ninja-annc-deactivate-', '');
+		$.post(ajaxurl, {ninja_annc_id:ninja_annc_id, action:"wpnj_deactivate_annc"}, function(data){
+			//alert('deactivated');
+			$("#ninja-annc-deactivate-" + ninja_annc_id).removeClass('ninja-annc-deactivate');
+			$("#ninja-annc-deactivate-" + ninja_annc_id).addClass('ninja-annc-activate');
+			$("#ninja-annc-deactivate-" + ninja_annc_id).attr('id', 'ninja-annc-activate-' + ninja_annc_id);
+			$("#tr_" + ninja_annc_id).removeClass('active');
+			$("#tr_" + ninja_annc_id).addClass('inactive');
+			$("#active_" + ninja_annc_id).attr("innerHTML", "Activate");
+		});
 	});
 	
+	
 	$("#ninja-annc-edit-cancel").click(function(){
-		window.location = "<?php echo $admin_url;?>";	
+		history.go(-1);
 	});
 	
 

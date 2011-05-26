@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Ninja Announcements
-Plugin URI: http://plugins.wpninjas.net?p=9
+Plugin URI: http://wpninjas.net/plugins/
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: Kevin Stover
-Version: 1.2.3
+Version: 1.3
 Author URI: http://wpninjas.net
 */
 
@@ -33,7 +33,9 @@ We need to do a few things:
 */
 session_start();
 function ninja_annc_display_css(){
-	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_display.css' );
+	if(!is_admin()){
+		wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_display.css' );
+	}
 }
 
 function ninja_annc_display($ninja_annc_id){
@@ -47,7 +49,9 @@ function ninja_annc_display($ninja_annc_id){
 	//Include our plugin css file.
 
 	//Grab all the active announcements in the database.
-	$ninja_annc_row = $wpdb->get_row( "SELECT * FROM ".$ninja_annc_table_name." WHERE active = 1 AND id = ".$ninja_annc_id, ARRAY_A);
+	$ninja_annc_row = $wpdb->get_row( 
+	$wpdb->prepare("SELECT * FROM $ninja_annc_table_name WHERE active = 1 AND id = %d", $ninja_annc_id), 
+	ARRAY_A);
 
 	//We need to compare dates, so let's figure out what today is.
 	$ninja_annc_today = current_time("timestamp");
@@ -82,7 +86,9 @@ function ninja_annc_default_display(){
 	//Include our plugin css file.
 
 	//Grab all the active announcements in the database.
-	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM ".$ninja_annc_table_name." WHERE location = 0 AND active = 1", ARRAY_A);
+	$ninja_annc_rows = $wpdb->get_results( 
+	$wpdb->prepare("SELECT * FROM $ninja_annc_table_name WHERE location = 0 AND active = 1")
+	, ARRAY_A);
 	//We need to compare dates, so let's figure out what today is.
 	$ninja_annc_today = current_time("timestamp");
 	
@@ -117,7 +123,8 @@ function ninja_annc_display_all(){
 	//Include our plugin css file.
 
 	//Grab all the active announcements in the database.
-	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM ".$ninja_annc_table_name." WHERE active = 1", ARRAY_A);
+	$ninja_annc_rows = $wpdb->get_results( 
+	$wpdb->prepare("SELECT * FROM $ninja_annc_table_name WHERE active = 1"), ARRAY_A);
 	//We need to compare dates, so let's figure out what today is.
 	$ninja_annc_today = current_time("timestamp");
 	
@@ -148,10 +155,11 @@ add_action("get_header", "ninja_annc_display_css");
 add_action("wp_head", "ninja_annc_default_display");
 
 function ninja_display_js(){
-	$plugin_url = WP_PLUGIN_URL.'/ninja-announcements';
-	wp_enqueue_script('ninja-annc-display',
-		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-display-js.php?plugin_url='.$plugin_url,
+	if(!is_admin()){
+		wp_enqueue_script('ninja-annc-display',
+		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-display.js',
 		array('jquery', 'jquery-ui-core'));
+	}
 }
 add_action("init", "ninja_display_js");
 
@@ -193,7 +201,7 @@ function ninja_annc_scripts() {
 	$admin_url = str_replace("wp-content", "wp-admin/options-general.php?page=ninja-annc-options", $wp_content_url);
 	
 	wp_enqueue_script('ninja-annc-js',
-		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-js.php?plugin_url='.$plugin_url.'&admin_url='.$admin_url,
+		WP_PLUGIN_URL . '/ninja-announcements/js/ninja-annc-admin.js',
 		array('jquery', 'jquery-ui-core'));
 
 	
@@ -296,7 +304,8 @@ function ninja_annc_options() {
 	if($_REQUEST['action'] == 'edit') { //BEGIN edit handling if()
 		
 		$ninja_annc_id = $_REQUEST['ninja_annc_id'];
-		$ninja_annc_row = $wpdb->get_row("SELECT * FROM $ninja_annc_table_name WHERE id = $ninja_annc_id", ARRAY_A);
+		$ninja_annc_row = $wpdb->get_row(
+		$wpdb->prepare( "SELECT * FROM $ninja_annc_table_name WHERE id = %d", $ninja_annc_id), ARRAY_A);
 
 		$ninja_annc_id = $ninja_annc_row['id'];
 		$ninja_annc_location = $ninja_annc_row['location'];
@@ -489,7 +498,12 @@ if (function_exists('ninja_annc_display')) {
 		$rightnow = current_time("timestamp");
 		
 		$ninja_annc_today = date("m/d/Y", $rightnow);
-		
+				wp_tiny_mce( false,  // true makes the editor "teeny"
+		array(
+			"theme_advanced_path" => false
+		)
+		);
+		wp_tiny_mce_preload_dialogs();
 		?>
                 <div class="wrap">
 	<div id="ninja_annc_options_new" class="icon32"><br></div>
@@ -628,7 +642,8 @@ if (function_exists('ninja_annc_display')) {
 	}else{ //BEGIN table handling if()
 	//Our user is on the main page of the options menu. 
 	//Display a table of existing announcements.
-	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM $ninja_annc_table_name WHERE active=1", ARRAY_A);
+	$ninja_annc_rows = $wpdb->get_results( 
+	$wpdb->prepare( "SELECT * FROM $ninja_annc_table_name WHERE active=1"), ARRAY_A);
 	$ninja_annc_today = current_time("timestamp");
 	
 	
@@ -644,7 +659,8 @@ if (function_exists('ninja_annc_display')) {
 		}
 	}
 	
-	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM $ninja_annc_table_name", ARRAY_A);
+	$ninja_annc_rows = $wpdb->get_results( 
+	$wpdb->prepare( "SELECT * FROM $ninja_annc_table_name" ), ARRAY_A);
 	?>
 	
 	<div class="wrap">
@@ -705,12 +721,12 @@ if (function_exists('ninja_annc_display')) {
 						$ninja_annc_class = "active";
 					}					
 					
-					echo '<tr class="'.$ninja_annc_class.'">';
+					echo '<tr class="'.$ninja_annc_class.'" id="tr_'.$ninja_annc_id.'">';
 					echo '<td>';
 					if($ninja_annc_class == 'inactive'){
-						echo '<span class="active"><a href="'.WP_PLUGIN_URL.'/ninja-announcements/include/process.php?action=activate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-activate" id="ninja-annc-activate-'.$ninja_annc_id.'">Activate</a></span>';
+						echo '<a href="#" class="ninja-annc-activate" id="ninja-annc-activate-'.$ninja_annc_id.'"><span class="active" id="active_'.$ninja_annc_id.'">Activate</a></span>';
 					}else{
-						echo '<span class="deactivate"><a href="'.WP_PLUGIN_URL.'/ninja-announcements/include/process.php?action=deactivate&ninja_annc_id='.$ninja_annc_id.'" class="ninja-annc-deactivate" id="ninja-annc-deactivate-'.$ninja_annc_id.'">Deactivate</a></span>';
+						echo '<a href="#" class="ninja-annc-deactivate" id="ninja-annc-deactivate-'.$ninja_annc_id.'"><span class="deactivate" id="active_'.$ninja_annc_id.'">Deactivate</a></span>';
 					}
 					echo ' | <span class="edit"><a href="'.$edit_url.'" class="ninja-annc-edit" id="ninja-annc-edit-'.$ninja_annc_id.'">Edit</a></span>';
 					echo ' | <span class="delete"><a href="#" class="ninja-annc-delete" id="ninja-annc-delete-'.$ninja_annc_id.'">Delete</a></span></td>';
@@ -754,7 +770,8 @@ function ninja_annc_widget($vars) {
 	$ninja_annc_table_name = $wpdb->prefix . "ninja_annc";
 	$ninja_annc_id = $vars['widget_id'];
 	$ninja_annc_id = str_replace("ninja_annc_", "", $ninja_annc_id);
-	$ninja_annc_row = $wpdb->get_row( "SELECT * FROM $ninja_annc_table_name WHERE active = 1 AND id = $ninja_annc_id", ARRAY_A);
+	$ninja_annc_row = $wpdb->get_row( 
+	$wpdb->prepare("SELECT * FROM $ninja_annc_table_name WHERE active = 1 AND id = %d", $ninja_annc_id), ARRAY_A);
 	
 	$ninja_annc_message = $ninja_annc_row['message'];
 	$ninja_annc_active = $ninja_annc_row['active'];
@@ -777,7 +794,8 @@ function ninja_annc_widget_init(){
 //This registers our widget as a usable one.
 	global $wpdb;
 	$ninja_annc_table_name = $wpdb->prefix . "ninja_annc";
-	$ninja_annc_rows = $wpdb->get_results( "SELECT * FROM ".$ninja_annc_table_name." WHERE location = 2", ARRAY_A);
+	$ninja_annc_rows = $wpdb->get_results( 
+	$wpdb->prepare( "SELECT * FROM $ninja_annc_table_name WHERE location = 2" ), ARRAY_A);
 	//We need to compare dates, so let's figure out what today is.
 	
 	foreach($ninja_annc_rows as $row){ //Steps through each of our row results.
@@ -841,4 +859,48 @@ function ninja_annc_install () {
 	}
 }
 
+
+
+add_action('wp_ajax_wpnj_delete_annc', 'wpnj_delete_annc');
+function wpnj_delete_annc(){
+	global $wpdb;
+	$ninja_annc_id = $_REQUEST['ninja_annc_id'];
+	$table_name = $wpdb->prefix . "ninja_annc";
+	
+	$wpdb->query( $wpdb->prepare( "DELETE FROM $table_name WHERE id = %d", $ninja_annc_id ) );
+	
+	die();
+}
+
+add_action('wp_ajax_wpnj_activate_annc', 'wpnj_activate_annc');
+function wpnj_activate_annc(){
+	global $wpdb;
+	$ninja_annc_id = $_REQUEST['ninja_annc_id'];
+	$table_name = $wpdb->prefix . "ninja_annc";
+	
+	$ninja_annc_row = $wpdb->get_row(
+		$wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $ninja_annc_id)
+		,ARRAY_A);
+	$ninja_annc_begindate = $ninja_annc_row['begindate'];
+	$ninja_annc_enddate = $ninja_annc_row['enddate'];
+	$ninja_annc_today = current_time("timestamp");
+
+	
+	if($ninja_annc_enddate >= $ninja_annc_today || $ninja_annc_enddate == 0){
+		$wpdb->update( $table_name, array( 'active' => 1), array( 'id' => $ninja_annc_id ));
+	}
+	
+	die();
+}
+
+add_action('wp_ajax_wpnj_deactivate_annc', 'wpnj_deactivate_annc');
+function wpnj_deactivate_annc(){
+	global $wpdb;
+	$ninja_annc_id = $_REQUEST['ninja_annc_id'];
+	$table_name = $wpdb->prefix . "ninja_annc";
+	
+	$wpdb->update( $table_name, array( 'active' => 0), array( 'id' => $ninja_annc_id ));
+	
+	die();
+}
 ?>
