@@ -4,7 +4,7 @@ Plugin Name: Ninja Announcements
 Plugin URI: http://wpninjas.net/plugins/
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: Kevin Stover
-Version: 1.3
+Version: 1.4
 Author URI: http://wpninjas.net
 */
 
@@ -32,6 +32,7 @@ We need to do a few things:
 	3)Update the database to deactivate past-due announcements.
 */
 session_start();
+require_once("wp-editor-return.php");
 function ninja_annc_display_css(){
 	if(!is_admin()){
 		wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_display.css' );
@@ -206,6 +207,7 @@ function ninja_annc_scripts() {
 
 	
 	//Load our javascripts for the tinyMCE editor.
+	/*
 	remove_all_filters('mce_external_plugins');
 	wp_enqueue_script('common');
 	wp_enqueue_script('jquery-color');
@@ -224,7 +226,7 @@ function ninja_annc_scripts() {
 	wp_enqueue_script('utils');
 	do_action("admin_print_styles-post-php");
 	do_action('admin_print_styles');
-	
+	*/
 
 }
 
@@ -232,6 +234,7 @@ function ninja_annc_scripts() {
 function ninja_annc_styles(){
 	wp_enqueue_style( 'ninja-annc-css', WP_PLUGIN_URL.'/ninja-announcements/css/ninja_annc_admin.css' );
 	wp_enqueue_style( 'jquery-ui-css', WP_PLUGIN_URL.'/ninja-announcements/css/flick/jquery-ui-1.7.3.custom.css' );
+	wp_enqueue_style( 'wpnj_forms_tinymce_css', WP_PLUGIN_URL . '/ninja-announcements/css/editor-buttons.css');
 }
 //END load scripts and styles
 
@@ -239,7 +242,7 @@ function ninja_annc_styles(){
 //This is the function that actually creates our options menu. It's a pretty long one.
 function ninja_annc_options() {
 
-	global $wpdb;
+	global $wpdb, $wp_editor;
 
 	$wp_content_url = WP_CONTENT_URL;
 	$admin_url = str_replace("wp-content", "wp-admin/options-general.php?page=ninja-annc-options", $wp_content_url);
@@ -253,7 +256,7 @@ function ninja_annc_options() {
 	}
 
 	//This if() statement handles user input from the edit section.
-	if($_REQUEST['submitted'] == 'yes'){ // BEGIN submit handling if()
+	if(isset($_REQUEST['submitted']) && $_REQUEST['submitted'] == 'yes'){ // BEGIN submit handling if()
 
 		$ninja_annc_id = $_REQUEST['ninja_annc_id'];
 	
@@ -301,7 +304,7 @@ function ninja_annc_options() {
 	//Eventually it will be replaced by a switch().
 	//Flow goes: Edit Announcement? -> New Announcement? -> Table.
 	//This part of our If...else statement creates the editing HTML
-	if($_REQUEST['action'] == 'edit') { //BEGIN edit handling if()
+	if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'edit') { //BEGIN edit handling if()
 		
 		$ninja_annc_id = $_REQUEST['ninja_annc_id'];
 		$ninja_annc_row = $wpdb->get_row(
@@ -334,12 +337,7 @@ function ninja_annc_options() {
 		//$ninja_annc_begindate = $ninja_annc_begindate.' '.$ninja_annc_begintimehr.':'.$ninja_annc_begintimemin.$ninja_annc_begintimeampm;
 		
 		//echo $ninja_annc_begindate;
-		wp_tiny_mce( false,  // true makes the editor "teeny"
-		array(
-			"theme_advanced_path" => false
-		)
-		);
-		wp_tiny_mce_preload_dialogs();
+
 		?>
         <div class="wrap">
 	<div id="ninja_annc_options_edit" class="icon32"><br></div>
@@ -360,11 +358,13 @@ function ninja_annc_options() {
 					}else{
 						echo " value = '$x'";
 					}
-					if($ninja_annc_begintimehr == $x){
+					
+					if(isset($ninja_annc_begintimehr) && $ninja_annc_begintimehr == $x){
 						echo " selected";
 					}elseif($x == 12 && $ninja_annc_ignore == 1){
 						echo " selected";
 					}
+
 					echo ">$x</option>";
 					$x++;
 				}
@@ -381,7 +381,7 @@ function ninja_annc_options() {
 					}else{
 						echo " value = '$x'";
 					}
-					if($ninja_annc_begintimemin == $x){
+					if(isset($ninja_annc_begintimemin) && $ninja_annc_begintimemin == $x){
 						echo " selected";
 					}elseif($x == 0 && $ninja_annc_ignore == 1){
 						echo " selected";
@@ -399,8 +399,8 @@ function ninja_annc_options() {
 			?>
 		</select>
 		<select name="begintimeampm" id="begintimeampm" class="time" <?php if($ninja_annc_ignore == 1){ echo "style='background-color: gray' disabled";}?>>
-			<option value = "am" <?php if($ninja_annc_begintimeampm == "am"){ echo "selected";}?>>am</option>
-			<option value = "pm" <?php if($ninja_annc_begintimeampm == "pm"){ echo "selected";}?>>pm</option>
+			<option value = "am" <?php if(isset($ninja_annc_begintimeampm) && $ninja_annc_begintimeampm == "am"){ echo "selected";}?>>am</option>
+			<option value = "pm" <?php if(isset($ninja_annc_begintimeampm) && $ninja_annc_begintimeampm == "pm"){ echo "selected";}?>>pm</option>
 			</select>
 		<br>
 		End Date:  &nbsp;  <input type="text"  class="date" name="enddate" id="enddate" value="<?php echo $ninja_annc_enddate;?>" <?php if($ninja_annc_ignore == 1){ echo "style='background-color: gray' disabled";}?>>
@@ -415,7 +415,7 @@ function ninja_annc_options() {
 					}else{
 						echo " value = '$x'";
 					}
-					if($ninja_annc_endtimehr == $x){
+					if(isset($ninja_annc_endtimehr) && $ninja_annc_endtimehr == $x){
 						echo " selected";
 					}elseif($x == 12 && $ninja_annc_ignore == 1){
 						echo " selected";
@@ -436,7 +436,7 @@ function ninja_annc_options() {
 					}else{
 						echo " value = '$x'";
 					}
-					if($ninja_annc_endtimemin == $x){
+					if(isset($ninja_annc_endtimemin) && $ninja_annc_endtimemin == $x){
 						echo " selected";
 					}elseif($x == 0 && $ninja_annc_ignore == 1){
 						echo " selected";
@@ -454,8 +454,8 @@ function ninja_annc_options() {
 			?>
 		</select>
 		<select name="endtimeampm" id="endtimeampm" class="time" <?php if($ninja_annc_ignore == 1){ echo "style='background-color: gray' disabled";}?>>
-			<option value = "am" <?php if($ninja_annc_endtimeampm == "am"){ echo "selected";}?>>am</option>
-			<option value = "pm" <?php if($ninja_annc_endtimeampm == "pm"){ echo "selected";}?>>pm</option>
+			<option value = "am" <?php if(isset($ninja_annc_endtimeampm) && $ninja_annc_endtimeampm == "am"){ echo "selected";}?>>am</option>
+			<option value = "pm" <?php if(isset($ninja_annc_endtimeampm) && $ninja_annc_endtimeampm == "pm"){ echo "selected";}?>>pm</option>
 		</select><br>
 		Location: <select name="ninja_annc_location" id="ninja_annc_location">
 			<option value="0" <?php if($ninja_annc_location == 0){ echo "selected";}?>>Default (Header)</option>
@@ -470,19 +470,11 @@ if (function_exists('ninja_annc_display')) {
 		
 		<br>
 		
-		<div id="poststuff">
+
 		<?php
-		if ( current_user_can( 'upload_files' ) ) {
-			?>
-			<div id="media-buttons" class="hide-if-no-js">
-				<?php do_action( 'media_buttons' ); ?>
-			</div>
-			<?php
-		}
+		echo $wp_editor->editor($ninja_annc_message, 'content', array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), true);
 		?>
-		<textarea rows="30" class="theEditor" cols="40" name="content" tabindex="2" id="content" style="border-color:#000000;"><?php echo $ninja_annc_message;?></textarea>
-	
-		</div>
+
 		</div>
 		
 		<input type="submit" value="Submit" class="button-primary">
@@ -493,17 +485,12 @@ if (function_exists('ninja_annc_display')) {
 	<?php
 	//END edit handling if()
 	//OUTPUT HTML for our new announcements page.
-	}elseif($_REQUEST['action'] == 'new'){ //BEGIN new announcement handling if()
+	}elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == 'new'){ //BEGIN new announcement handling if()
 		
 		$rightnow = current_time("timestamp");
 		
 		$ninja_annc_today = date("m/d/Y", $rightnow);
-				wp_tiny_mce( false,  // true makes the editor "teeny"
-		array(
-			"theme_advanced_path" => false
-		)
-		);
-		wp_tiny_mce_preload_dialogs();
+
 		?>
                 <div class="wrap">
 	<div id="ninja_annc_options_new" class="icon32"><br></div>
@@ -620,16 +607,8 @@ if (function_exists('ninja_annc_display')) {
 		</select><br>
 		<div id="poststuff">
 		<?php
-		if ( current_user_can( 'upload_files' ) ) {
-			?>
-			<div id="media-buttons" class="hide-if-no-js">
-				<?php do_action( 'media_buttons' ); ?>
-			</div>
-			<?php
-		}
+		echo $wp_editor->editor('', 'content', array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), true);
 		?>
-		<textarea rows="30" class="theEditor" cols="40" name="content" tabindex="2" id="content" style="border-color:#000000;"></textarea>
-	
 		</div>
 		</div>
 		
