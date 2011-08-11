@@ -3,17 +3,13 @@ Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.3
+Tested up to: 3.2
+Stable tag: 1.4
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
-Version 1.3 Fixes some major security holes within Ninja Announcements. Please upgrade asap.
-
-Version 1.2.3 Fixes a bug that was preventing the link/unlick buttons from working on the rich text editor.
-
-Version 1.2.2 Fixes a major bug that some users were experiencing. This bug caused the announcement editor to appear all white. Please download the new version.
+Version 1.4 Fixes a major bug that prevented Ninja Announcements from working properly with version 3.2 of WordPress.
 
 The Ninja Announcements plugin displays small portions of text and/or images/video on pages and posts. Generally, these
 are used to let your visitors know about something special. They can be scheduled so that they are only displayed 
@@ -138,3 +134,6 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 
 = 1.3 =
 *Fixed some major security holes within Ninja Announcements.
+
+= 1.4 =
+*FIxed a major bug that prevented users from editing Ninja Announcements properly on WordPress 3.2.
