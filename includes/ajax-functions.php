@@ -99,8 +99,11 @@ function ninja_annc_close(){
 		$meta = get_post_meta($id, '_ninja_annc_meta', true);
 		$cookie_name = 'ninja_annc_close_'.$id;
 	}
-	$closed_time = $meta['closed_time'];
-
+	if(isset($meta['closed_time'])){
+		$closed_time = $meta['closed_time'];
+	}else{
+		$closed_time = 'session';
+	}
 	if(session_id() == '') {
 		session_start();
 	}
