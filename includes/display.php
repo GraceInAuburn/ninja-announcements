@@ -246,7 +246,7 @@ function ninja_annc_check($id, $widget = false, $group = false, $before_title = 
 	if(isset($meta['display_on_posts'])){
 		$display_on_posts = $meta['display_on_posts'];
 	}else{
-		$display_on_posts = '';
+		$display_on_posts = 1;
 	}	
 	if(isset($meta['advanced_page'])){
 		$advanced_page = $meta['advanced_page'];
@@ -256,7 +256,7 @@ function ninja_annc_check($id, $widget = false, $group = false, $before_title = 
 	if(isset($meta['display_on_pages'])){
 		$display_on_pages = $meta['display_on_pages'];
 	}else{
-		$display_on_pages = '';
+		$display_on_pages = 1;
 	}
 	if(isset($meta['advanced_cat'])){
 		$advanced_cat = $meta['advanced_cat'];
