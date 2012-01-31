@@ -9,11 +9,12 @@ Stable tag: 2.0
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
-*Notice* - Version 2.0 represents a huge leap forward for Ninja Announcements. If you have not already, please update to this version. If you have used 
-Ninja Announcements in the past, we recommend that you deactivate the plugin, delete its folder and then upload and activate this new version.
+*Notice* - Version 2.0 represents a huge leap forward for Ninja Announcements. If you have not already, please update to this version.
+If you are upgrading from an earlier version of Ninja Announcements, we recommend that you deactivate the previous version and delete
+it before installing this version.
 
-As of version 2.0, Ninja Announcements also fully supports localization. If you are able to translate the plugin into a non-English language, please visit
-wpninjas.net and drop us a line letting us know. We want to make the plugin available to as many languages as possible!
+As of Version 2.0, Ninja Announcements fully supports localization. If you are interesting in translating Ninja Announcements
+into a non-English language, please visit wpninjas.net and let us know so that we can include it in future versions.
 
 The Ninja Announcements plugin displays small portions of text and/or images/video on pages and posts. Generally, these
 are used to let your visitors know about something special. They can be scheduled so that they are only displayed 
@@ -46,7 +47,7 @@ Features of Ninja Announcements Lite:
 
 Upgrading to Ninja Announcements Pro unlocks the following features:
 
-	* Show your announcements on pages and posts, even attach them to specific posts or pages if you want.
+	* Show your announcements on posts or pages, even attach them to specific pages, posts or categories.
 	* Control the HTML output of Ninja Announcements by setting which wrapper elements it should use.
 	* Restrict announcement display by user role. i.e. Show announcements only to people who are logged in or those who are not logged in. Display your announcement only to editors, subscribers, administrators etc.
 	* Show random announcements by using the new "Announcement Group" functionality.

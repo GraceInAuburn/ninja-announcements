@@ -241,7 +241,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'ignore_dates',
 			'default' => 'checked',
-			'title' => __('Not Scheduled (Will display whenever active)'),
+			'title' => __('Not Scheduled (Will display whenever active)', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<h4>',
 			'before_label' => '&nbsp;',
@@ -253,7 +253,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'begin_date',
 			'default' => '',
-			'title' => __('Begin Date'),
+			'title' => __('Begin Date', 'ninja-announcements'),
 			'type' => 'text',
 			'before' => '<table><tr>',
 			'before_label' => '<td>',
@@ -265,7 +265,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'begin_hr',
 			'default' => '',
-			'title' => __('Time '),
+			'title' => __('Time ', 'ninja-announcements'),
 			'type' => 'select',
 			'before' => '',
 			'before_label' => '<td>',
@@ -333,7 +333,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'end_date',
 			'default' => '',
-			'title' =>__('End Date'),
+			'title' =>__('End Date', 'ninja-announcements'),
 			'type' => 'text',
 			'before' => '<tr>',
 			'before_label' => '<td>',
@@ -345,7 +345,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'end_hr',
 			'default' => '',
-			'title' => __('Time'),
+			'title' => __('Time', 'ninja-announcements'),
 			'type' => 'select',
 			'before' => '',
 			'before_label' => '<td>',
@@ -413,7 +413,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '',
 			'name' => 'select_all_days',
 			'default' => $select_all_days,
-			'title' => __('Select All'),
+			'title' => __('Select All', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<h4>Days of the week &nbsp;&nbsp;',
 			'before_label' => '&nbsp;',
@@ -424,7 +424,7 @@ function ninja_annc_create_meta($post) {
 		'Sun' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Sun',
-			'title' => __('Sunday'),
+			'title' => __('Sunday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '',
 			'before_label' => '&nbsp;',
@@ -436,7 +436,7 @@ function ninja_annc_create_meta($post) {
 		'Mon' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Mon',
-			'title' => __('Monday'),
+			'title' => __('Monday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '',
 			'before_label' => '&nbsp;',
@@ -448,7 +448,7 @@ function ninja_annc_create_meta($post) {
 		'Tue' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Tue',
-			'title' => __('Tuesday'),
+			'title' => __('Tuesday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before_label' => '&nbsp;',
 			'after_label' => '',
@@ -459,7 +459,7 @@ function ninja_annc_create_meta($post) {
 		'Wed' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Wed',
-			'title' => __('Wednsday'),
+			'title' => __('Wednsday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '',
 			'before_label' => '&nbsp;',
@@ -471,7 +471,7 @@ function ninja_annc_create_meta($post) {
 		'Thu' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Thu',
-			'title' => __('Thursday'),
+			'title' => __('Thursday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before_label' => '&nbsp;',
 			'after_label' => '',
@@ -482,7 +482,7 @@ function ninja_annc_create_meta($post) {
 		'Fri' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Fri',
-			'title' => __('Friday'),
+			'title' => __('Friday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '',
 			'before_label' => '&nbsp;',
@@ -494,7 +494,7 @@ function ninja_annc_create_meta($post) {
 		'Sat' => array(
 			'field' => '_ninja_annc_meta',
 			'name' => 'Sat',
-			'title' => __('Saturday'),
+			'title' => __('Saturday', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before_label' => '&nbsp;',
 			'after_label' => '',
@@ -510,7 +510,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'show_title',
 			'default' => 'checked',
-			'title' => __('Show Title'),
+			'title' => __('Show Title', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '',
 			'before_label' => '&nbsp;',
@@ -521,16 +521,16 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'location',
 			'default' => '',
-			'title' => __('Location'),
+			'title' => __('Location', 'ninja-announcements'),
 			'type' => 'select',
 			'before' => '<p>',
 			'before_label' => '',
 			'after_label' => '&nbsp;',
 			'after' => '</p>',
 			'options' => array(
-				array('label' => __('Header (Default)'), 'value' => 'default'), 
-				array('label' => __('Sidebar (Widget)'), 'value' => 'widget'),
-				array('label' => __('Manual (Function)'), 'value' => 'function'),
+				array('label' => __('Header (Default)', 'ninja-announcements'), 'value' => 'default'), 
+				array('label' => __('Sidebar (Widget)', 'ninja-announcements'), 'value' => 'widget'),
+				array('label' => __('Manual (Function)', 'ninja-announcements'), 'value' => 'function'),
 			),
 		)
 	);
@@ -541,7 +541,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'show_close',
 			'default' => 'checked',
-			'title' => __('Allow the user to close the announcement'),
+			'title' => __('Allow the user to close the announcement', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<p>',
 			'before_label' => '&nbsp;',
@@ -552,7 +552,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'show_open',
 			'default' => 'checked',
-			'title' => __('Allow the announcement to be re-opened'),
+			'title' => __('Allow the announcement to be re-opened', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<p>',
 			'before_label' => '&nbsp;',
@@ -572,7 +572,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'display_main',
 			'default' => 'checked',
-			'title' => __('Display on your Homepage'),
+			'title' => __('Display on your Homepage', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<p>',
 			'before_label' => '&nbsp;',
@@ -584,7 +584,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'display_front',
 			'default' => 'checked',
-			'title' => __('Display on your Frontpage'),
+			'title' => __('Display on your Frontpage', 'ninja-announcements'),
 			'type' => 'checkbox',
 			'before' => '<p>',
 			'before_label' => '&nbsp;',
@@ -600,7 +600,7 @@ function ninja_annc_create_meta($post) {
 			'field' => '_ninja_annc_meta',
 			'name' => 'no_options',
 			'default' => '',
-			'title' => __('This announcement\'s settings are being controlled by one of its groups. Please remove this announcement from the controlling group, or visit the group edit page to change its settings.'),
+			'title' => __('This announcement\'s settings are being controlled by one of its groups. Please remove this announcement from the controlling group, or visit the group edit page to change its settings.', 'ninja-announcements'),
 			'type' => 'desc',
 			'before' => '<h4>',
 			'before_label' => '',
@@ -611,21 +611,21 @@ function ninja_annc_create_meta($post) {
 	
 	if(NINJA_ANNC_TYPE == 'Pro'){
 		if(ninja_annc_group_override_check($post->ID)){
-			add_meta_box( 'ninja_annc_options', __('Announcement Options'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $no_options );
+			add_meta_box( 'ninja_annc_options', __('Announcement Options', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $no_options );
 		}else{
 			if ( function_exists('add_meta_box') ) {
-				add_meta_box( 'ninja_annc_schedule', __('Announcement Schedule'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $schedule );
-				add_meta_box( 'ninja_annc_options', __('Announcement Options'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $annc_options );			
-				add_meta_box( 'ninja_annc_display', __('Main Page Display Options'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $display_options );			
+				add_meta_box( 'ninja_annc_schedule', __('Announcement Schedule', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $schedule );
+				add_meta_box( 'ninja_annc_options', __('Announcement Options', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $annc_options );			
+				add_meta_box( 'ninja_annc_display', __('Main Page Display Options', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $display_options );			
 				require_once(NINJA_ANNC_DIR."/includes/pro/meta-boxes-3.php");
 				
 			}
 		}
 	}else{
 		if ( function_exists('add_meta_box') ) {
-			add_meta_box( 'ninja_annc_schedule', __('Announcement Schedule'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $schedule );
-			add_meta_box( 'ninja_annc_options', __('Announcement Options'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $annc_options );			
-			add_meta_box( 'ninja_annc_display', __('Main Page Display Options'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $display_options );			
+			add_meta_box( 'ninja_annc_schedule', __('Announcement Schedule', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $schedule );
+			add_meta_box( 'ninja_annc_options', __('Announcement Options', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $annc_options );			
+			add_meta_box( 'ninja_annc_display', __('Main Page Display Options', 'ninja-announcements'), 'ninja_annc_display_meta', 'ninja_annc', 'normal', 'core', $display_options );			
 		}
 	}
 }

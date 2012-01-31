@@ -553,10 +553,10 @@ function ninja_annc_output_display($id, $widget = false, $group = false, $before
 	}
 	if(($session_close == 'closed' OR $cookie_close == 'closed') AND $show_close == 1){
 		$display = "display:none;";
-		$button = __('Open');
+		$button = __('Open', 'ninja-announcements');
 	}else{
 		$display = "";
-		$button = __('Close');
+		$button = __('Close', 'ninja-announcements');
 	}	
 	do_action('ninja_annc_before_output');
 	do_action('ninja_annc_before_output_'.$id);

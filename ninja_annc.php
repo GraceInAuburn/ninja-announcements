@@ -31,6 +31,13 @@ define("NINJA_ANNC_URL", WP_PLUGIN_URL."/ninja-announcements");
 define("NINJA_ANNC_VERSION", "2.0");
 define("NINJA_ANNC_TYPE", "Lite");
 
+function ninja_annc_load_lang() {
+	$plugin_dir = basename(dirname(__FILE__));
+	$lang_dir = $plugin_dir.'/lang/';
+	load_plugin_textdomain( 'ninja-announcements', false, $lang_dir );
+}
+add_action('init', 'ninja_annc_load_lang');
+
 require_once(NINJA_ANNC_DIR."/includes/cpt.php");
 require_once(NINJA_ANNC_DIR."/includes/meta-boxes.php");
 require_once(NINJA_ANNC_DIR."/includes/scripts-styles.php");
@@ -52,12 +59,12 @@ function change_publish_button( $translation, $text ) {
 	$post_status = $post->post_status;
 	if($text == 'Publish'){
 		if($post_status == 'draft' OR $post_status == 'auto-draft'){
-			return __('Activate');
+			return __('Activate', 'ninja-announcements');
 		}
 	}elseif($text == 'Update'){
-		return __('Deactivate');
+		return __('Deactivate', 'ninja-announcements');
 	}elseif($text == 'Save Draft'){
-		return __('Save');
+		return __('Save', 'ninja-announcements');
 	}	
 	return $translation;
 }

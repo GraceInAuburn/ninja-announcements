@@ -6,16 +6,16 @@ add_filter("manage_edit-ninja_annc_columns", "ninja_annc_columns");
 function ninja_annc_columns($columns){ //this function display the columns headings
 	$columns = array(
 		"cb" => "<input type=\"checkbox\" />",
-		"action" => __('Action'),
-		"title" => __('Announcement Title'),
+		"action" => __('Action', 'ninja-announcements'),
+		"title" => __('Announcement Title', 'ninja-announcements'),
 		);
 	if(NINJA_ANNC_TYPE == 'Pro'){
-		$columns['groups'] = __('Groups');
+		$columns['groups'] = __('Groups', 'ninja-announcements');
 	}		
 	
-	$columns["dates"] = __('Scheduled Dates');
-	$columns["content"] = __('Description');
-	$columns["function"] = __('Function Code');
+	$columns["dates"] = __('Scheduled Dates', 'ninja-announcements');
+	$columns["content"] = __('Description', 'ninja-announcements');
+	$columns["function"] = __('Function Code', 'ninja-announcements');
 
 	return $columns;
 }
@@ -24,7 +24,7 @@ function ninja_annc_custom_columns($column){
 	global $post;
 	$meta = get_post_meta($post->ID, '_ninja_annc_meta', true);
 	if(isset($meta['ignore_dates']) AND $meta['ignore_dates'] == 1){
-		$dates = __('Not Scheduled (Will show whenever active)');
+		$dates = __('Not Scheduled (Will show whenever active)', 'ninja-announcements');
 	}else{
 		if(isset($meta['begin_date'])){
 			$begin_date = $meta['begin_date'];
@@ -40,7 +40,7 @@ function ninja_annc_custom_columns($column){
 	}
 	if(NINJA_ANNC_TYPE == 'Pro'){
 		if(ninja_annc_group_override_check($post->ID)){
-			$dates = __('Announcement controlled via group settings');
+			$dates = __('Announcement controlled via group settings', 'ninja-announcements');
 		}
 	}
 	switch ($column){
@@ -50,11 +50,11 @@ function ninja_annc_custom_columns($column){
 		case 'action':
 			if($post->post_status == 'draft'){
 				echo '<a href="#" class="ninja-annc-activate" id="ninja_annc_'.$post->ID.'">';
-				_e('Activate');
+				_e('Activate', 'ninja-announcements');
 				echo '</a>';
 			}else{
 				echo '<a href="#" class="ninja-annc-deactivate" id="ninja_annc_'.$post->ID.'">';
-				_e('Deactivate');
+				_e('Deactivate', 'ninja-announcements');
 				echo '</a>';
 			}
 			break;

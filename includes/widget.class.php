@@ -136,15 +136,15 @@ class Ninja_Annc_Widget extends WP_Widget {
 			$end_hr = '';
 			$end_min = '';
 			$end_ampm = '';
-			$title = __( 'New title');
+			$title = __( 'New title', 'ninja-announcements');
 			$annc_id = "NEW";
 		}
 		?>
 		<input id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="hidden" value="<?php echo $title; ?>" />
 		<p>
-		<label for=""><?php _e('Announcement:');?></label>
+		<label for=""><?php _e('Announcement:', 'ninja-announcements');?></label>
 		<select id="<?php echo $this->get_field_id('annc_id'); ?>" name="<?php echo $this->get_field_name('annc_id'); ?>" class="ninja-annc-widget-select">
-		<option value="" selected>--<?php _e('Select an announcement');?></option>
+		<option value="" selected>--<?php _e('Select an announcement', 'ninja-announcements');?></option>
 		<?php
 		
 		foreach($annc as $a){
@@ -159,17 +159,17 @@ class Ninja_Annc_Widget extends WP_Widget {
 		<div id="<?php echo $this->get_field_id('ninja_annc_loading'); ?>" style="display:none;"><img src="<?php echo NINJA_ANNC_URL;?>/images/loading.gif"></div>
 		</p>
 		<p>
-			<input type="checkbox" id="<?php echo $this->get_field_id('active'); ?>" name="<?php echo $this->get_field_name('active'); ?>" class="" value="checked" <?php if($post_status == 'publish'){ echo 'checked';}?>> <label for="<?php echo $this->get_field_id('active'); ?>"><?php _e('Active');?></a>
+			<input type="checkbox" id="<?php echo $this->get_field_id('active'); ?>" name="<?php echo $this->get_field_name('active'); ?>" class="" value="checked" <?php if($post_status == 'publish'){ echo 'checked';}?>> <label for="<?php echo $this->get_field_id('active'); ?>"><?php _e('Active', 'ninja-announcements');?></a>
 		</p>	
 		<p>
-			<input type="checkbox" id="<?php echo $this->get_field_id('ignore_dates'); ?>" name="<?php echo $this->get_field_name('ignore_dates'); ?>" class="ninja-annc-ignore-dates" value="1" <?php if($ignore_dates ==1){ echo 'checked';}?>> <label for="<?php echo $this->get_field_id('ignore_dates'); ?>"><?php _e('Not Scheduled (Will show whenever active)');?></a>
+			<input type="checkbox" id="<?php echo $this->get_field_id('ignore_dates'); ?>" name="<?php echo $this->get_field_name('ignore_dates'); ?>" class="ninja-annc-ignore-dates" value="1" <?php if($ignore_dates ==1){ echo 'checked';}?>> <label for="<?php echo $this->get_field_id('ignore_dates'); ?>"><?php _e('Not Scheduled (Will show whenever active)', 'ninja-announcements');?></a>
 		</p>
 		<p>
-		<label for=""><?php _e('Begin Date:');?></label>
+		<label for=""><?php _e('Begin Date:', 'ninja-announcements');?></label>
 		<input type="text" id="<?php echo $this->get_field_id('begin_date'); ?>" name="<?php echo $this->get_field_name('begin_date'); ?>" class="date <?php echo $this->get_field_id('ninja-annc-schedule'); ?>" value="<?php echo $begin_date;?>" <?php echo $disabled;?>>
 		</p>		
 		<p>
-		<label for=""><?php _e('Begin Time:');?></label>
+		<label for=""><?php _e('Begin Time:', 'ninja-announcements');?></label>
 		<select id="<?php echo $this->get_field_id('begin_hr'); ?>" name="<?php echo $this->get_field_name('begin_hr'); ?>" class="<?php echo $this->get_field_id('ninja-annc-schedule'); ?>" <?php echo $disabled;?>>
 			<option value="1" <?php if($begin_hr == 1){ echo 'selected';}?>>1</option>
 			<option value="2" <?php if($begin_hr == 2){ echo 'selected';}?>>2</option>
@@ -204,11 +204,11 @@ class Ninja_Annc_Widget extends WP_Widget {
 		</select>
 		</p>		
 		<p>
-		<label for=""><?php _e('End Date:');?></label>
+		<label for=""><?php _e('End Date:', 'ninja-announcements');?></label>
 		<input type="text" id="<?php echo $this->get_field_id('end_date'); ?>" name="<?php echo $this->get_field_name('end_date'); ?>" class="date <?php echo $this->get_field_id('ninja-annc-schedule'); ?>" value="<?php echo $end_date;?>" <?php echo $disabled;?>>
 		</p>		
 		<p>
-		<label for=""><?php _e('End Time:');?></label>
+		<label for=""><?php _e('End Time:', 'ninja-announcements');?></label>
 		<select id="<?php echo $this->get_field_id('end_hr'); ?>" name="<?php echo $this->get_field_name('end_hr'); ?>" class="<?php echo $this->get_field_id('ninja-annc-schedule'); ?>" <?php echo $disabled;?>>
 			<option value="1" <?php if($end_hr == 1){ echo 'selected';}?>>1</option>
 			<option value="2" <?php if($end_hr == 2){ echo 'selected';}?>>2</option>
