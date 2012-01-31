@@ -49,6 +49,9 @@ function ninja_annc_edit_js(){
 			add_filter( 'gettext', 'change_publish_button', 10, 2 );
 		}
 	}
+	if(isset($_REQUEST['page']) AND $_REQUEST['page'] == 'plugin_settings' AND isset($_REQUEST['post_type']) AND $_REQUEST['post_type'] == 'ninja_annc'){
+		wp_enqueue_style( 'ninja-annc-admin', NINJA_ANNC_URL .'/css/ninja-annc-admin.css');
+	}
 }
 
 add_action('load-widgets.php', 'ninja_annc_widget_js');
