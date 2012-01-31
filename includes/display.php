@@ -439,7 +439,7 @@ function ninja_annc_check($id, $widget = false, $group = false, $before_title = 
 		);
 	$cats = get_categories($args);
 	foreach($cats as $cat){
-		if($meta['cat_'.$cat->slug] == 1){
+		if(isset($meta['cat_'.$cat->slug]) AND $meta['cat_'.$cat->slug] == 1){
 			$categories[] = $cat->cat_ID;
 		}
 	}
@@ -516,7 +516,7 @@ function ninja_annc_output_display($id, $widget = false, $group = false, $before
 		$cookie_name = 'ninja_annc_close_'.$id;
 		//echo 'post';
 	}
-	$content_wrapper = $meta['content_wrapper'];
+
 	$content = $this_post['post_content'];
 	$content = do_shortcode($content);
 	$content = apply_filters('ninja_annc_content', $content);
@@ -529,8 +529,16 @@ function ninja_annc_output_display($id, $widget = false, $group = false, $before
 	}else{
 		$show_title = '';
 	}
-	$title_wrapper = $meta['title_wrapper'];
-
+	if(isset($meta['content_wrapper'])){
+		$content_wrapper = $meta['content_wrapper'];	
+	}else{
+		$content_wrapper = 'div';
+	}
+	if(isset($meta['title_wrapper'])){
+		$title_wrapper = $meta['title_wrapper'];
+	}else{
+		$title_wrapper = 'div';
+	}
 	if(isset($_SESSION[$cookie_name])){
 		$session_close = $_SESSION[$cookie_name];
 	}else{

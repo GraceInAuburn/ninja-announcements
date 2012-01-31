@@ -3,9 +3,9 @@ function ninja_annc_initial_setup(){
 	global $wpdb;
 	$plugin_settings = get_option('ninja_annc_settings');
 	if(!isset($plugin_settings['default_title_wrapper']) OR $plugin_settings['default_title_wrapper'] == ''){
-		$plugin_settings['default_style'] == 'checked';
-		$plugin_settings['default_title_wrapper'] == 'h3';
-		$plugin_settings['default_content_wrapper'] == 'span';
+		$plugin_settings['default_style'] = 'checked';
+		$plugin_settings['default_title_wrapper'] = 'div';
+		$plugin_settings['default_content_wrapper'] = 'div';
 		update_option('ninja_annc_settings', $plugin_settings);
 	}
 	
