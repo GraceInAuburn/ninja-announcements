@@ -1,19 +1,24 @@
-=== Ninja Announcements ===
+=== Ninja Announcements Lite ===
 Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
-Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: 1.4
+Requires at least: 3.1
+Tested up to: 3.3
+Stable tag: 2.0
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
-Version 1.4 Fixes a major bug that prevented Ninja Announcements from working properly with version 3.2 of WordPress.
+*Notice* - Version 2.0 represents a huge leap forward for Ninja Announcements. If you have not already, please update to this version.
+If you are upgrading from an earlier version of Ninja Announcements, we recommend that you deactivate the previous version and delete
+it before installing this version.
+
+As of Version 2.0, Ninja Announcements fully supports localization. If you are interesting in translating Ninja Announcements
+into a non-English language, please visit wpninjas.net and let us know so that we can include it in future versions.
 
 The Ninja Announcements plugin displays small portions of text and/or images/video on pages and posts. Generally, these
 are used to let your visitors know about something special. They can be scheduled so that they are only displayed 
-between specified dates/times.  For Example, if you wanted to wish everyone a Merry Christmas, but you didn't want
+between specified dates/times and/or on certain days of the week.  For Example, if you wanted to wish everyone a Merry Christmas, but you didn't want
 to display the message until the 20th of December, you could schedule an announcement to begin on December 20 and
 end on December 26. A visitor coming to your site would see the announcement between those dates, but otherwise your 
 site would look just the same.
@@ -24,32 +29,34 @@ to include its own version of TinyMCE. Moreover, you can also include images and
 library or YouTube, so you don't have to create or maintain a separate media library for your announcements.
 
 Each of your announcements has its own location and scheduling settings, allowing you to place the announcement 
-exactly when and where you want it, even display it as a widget.
+exactly when and where you want it, even display it as a widget. All this without touching code, even shortcodes!
 
 The administration section of Ninja Announcements makes it very easy to add and edit announcements. Older announcements
 are not automatically deleted, but simply deactivated so that they can be edited later. Of course, these can just be deleted if you want.
 
-Features:
+Features of Ninja Announcements Lite:
 
 	* Use multiple announcements, each with its own settings.
-	* Choose from three different announcement placements: Header, Widget or Manual.
-	* Schedule announcements by date and/or hour so that they only show for a certain time period.
+	* Consistent class and id tags make styling your announcements through CSS simple.
+	* Choose from three different announcement placements: Header, Widget or Manual (Function) [No shortcodes required].
+	* Schedule announcements by date, day and/or hour so that they only show for a certain time period.
 	* Edit announcements using the same rich text editor as a WordPress post.
 	* Insert images or videos into announcements from your WordPress Media Library, just like you would a post.
 	* Since it uses the built-in WordPress rich text editor and media gallery, it has a small footprint.
-	* NEW for 1.1 - Users are able to close the announcement for the rest of their browsing session
-	* NEW for 1.1 - Inclusion of a shortcode allows you to easily place an announcement on a page or post.
-	* NEW for 1.1 - A new function for template designers that allows you to show all active announcements.
+	* Choose wether or not users are able to close the announcement.
 
+Upgrading to Ninja Announcements Pro unlocks the following features:
+
+	* Show your announcements on posts or pages, even attach them to specific pages, posts or categories.
+	* Control the HTML output of Ninja Announcements by setting which wrapper elements it should use.
+	* Restrict announcement display by user role. i.e. Show announcements only to people who are logged in or those who are not logged in. Display your announcement only to editors, subscribers, administrators etc.
+	* Show random announcements by using the new "Announcement Group" functionality.
+	* Set the length of time announcements stay closed after a user has clicked "closed".
+	* Documentation regarding hooks and filters included in Ninja Announcements Pro.
 	
 == Screenshots ==
+To see screenshots, please visit http://wpninjas.net.
 
-1. Ninja Announcements - Main Administration Panel
-2. Ninja Announcements - New Announcement
-3. Ninja Announcements - Editing An Announcement
-4. Ninja Announcements - Default Display Position
-5. Ninja Announcements - Custom Display Position
-6. Ninja Announcements - Sidebar/Widget Display Position
 	
 == Installation ==
 
@@ -57,9 +64,9 @@ Installing Ninja Announcements is really simple.
 *Notice* - If you're installing Ninja Announcements on an 3.0 Multi-Site, you'll have to activate it on each blog you want to use
 it on. Ninja Announcements does not currently support Network Activation.
 
-1. Upload the plugin folder (i.e. ninja_annc) to the /wp-content/plugins/ directory of your WordPress installation.
+1. Upload the plugin folder (i.e. ninja-announcements) to the /wp-content/plugins/ directory of your WordPress installation.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Add or edit announcements by clicking on the "Ninja Announcements" link underneath "Settings" in the admin panel.
+3. Add or edit announcements by clicking on the "Ninja Announcements" link.
 4. Have a snack. You're done.
 
 == Use ==
@@ -75,11 +82,7 @@ to call within your template file. The function will show the desired announceme
 As each announcement has its own, slightly different, function, you'll have to set the location to "Manual (Function)" and
 save your changes before you are given the php code.
 
-NEW for 1.1:
-* You can add any announcement to your posts or pages by using the shortcode [ninja_annc id=2] (where 2 is the id of the announcement you want to display).
-* Template designers can now call the function: ninja_annc_display_all(); This will display all active announcements in one location.
-
-(To see examples and screenshots of each of these uses, please visit http://www.wpninjas.net/plugins)
+(To see examples and screenshots of each of these uses, please visit http://wpninjas.net)
 
 
 == Advanced Styling ==
@@ -90,7 +93,7 @@ so by styling the id of the container div. This div will always have an id of: n
 This id number can be found at the top of each announcement's edit page. We highly recommend that you change this in your own stylesheet, 
 as future versions of this plugin will likely overwrite the display css file. 
 
-For a more detailed explaination of styling your announcements and the close button, please visit: http://plugins.wpninjas.net
+For a more detailed explaination of styling your announcements and the close button, please visit: http://wpninjas.net
 
 == Help / Bugs ==
 
@@ -105,7 +108,6 @@ forums are also where we take bug reports and feature requests.
 
 We are contemplating adding many features to future versions of the Ninja Announcements plugin. This is a non-exhaustive list:
 
-	* Currently, the widget location is not as robust as we would like it to be. Future versions will improve upon the widget display location.
 	* Announcement previews
 	* Multiple widget announcements
 	* Multi-site network activation
@@ -137,3 +139,6 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 
 = 1.4 =
 *FIxed a major bug that prevented users from editing Ninja Announcements properly on WordPress 3.2.
+
+= 2.0 =
+* Completely reworked how Ninja Announcements works. 2.0 represents a much better version of the plugin overall.
