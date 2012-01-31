@@ -62,7 +62,7 @@ function ninja_annc_show_menu(){
 				<li><a href="http://wpninjas.net/plugin/ninja-announcements/advanced-html-markup-control/">HTML Markup Control</a></li>
 				<li><a href="http://wpninjas.net/plugin/ninja-announcements/announcement-groups/">Announcement Groups</a></li>
 			</ul>
-			<a class="button-primary" href="http://wpninjas.net/?p=562">Upgrade Now!</a>
+			<a class="button-primary" href="http://wpninjas.net/product/ninja-announcements-plugin/">Upgrade Now!</a>
 		</div>
 			<?php
 			}
