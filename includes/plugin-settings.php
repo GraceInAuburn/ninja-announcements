@@ -50,6 +50,24 @@ function ninja_annc_show_menu(){
 		<input class="button-primary ninja_save_data" type="submit" value="<?php _e('Save Changes', 'ninja-announcements');?>" />
 		</form>	
 		</div>
+		<?php
+			if(NINJA_ANNC_TYPE == 'Lite'){
+			?>
+		<div class="wrap-right" >
+			<img src="<?php echo NINJA_ANNC_URL;?>/images/wpnj-logo-wt.png" width="263px" height="45px" />
+			<h2>Upgrade to Ninja Announcements Pro for many more great features including...</h2>
+			<ul>
+				<li><a href="http://wpninjas.net/plugin/ninja-announcements/advanced-display-options/">Advanced Display Options</a></li>
+				<li><a href="http://wpninjas.net/plugin/ninja-announcements/advanced-hooks-filters/">Hooks and Filters</a></li>
+				<li><a href="http://wpninjas.net/plugin/ninja-announcements/advanced-html-markup-control/">HTML Markup Control</a></li>
+				<li><a href="http://wpninjas.net/plugin/ninja-announcements/announcement-groups/">Announcement Groups</a></li>
+			</ul>
+			<a class="button-primary" href="http://wpninjas.net/?p=562">Upgrade Now!</a>
+		</div>
+			<?php
+			}
+			?>
+		
 	</div>
 <?php
 }
