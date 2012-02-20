@@ -16,7 +16,9 @@ class Ninja_Annc_Widget extends WP_Widget {
 		$meta = get_post_meta($annc_id, '_ninja_annc_meta', true);
 		$show_title = $meta['show_title'];
 		$location = $meta['location'];
-		if($location == 'widget'){
+		$annc_post = get_post($annc_id, ARRAY_A);
+		$post_status = $annc_post['post_status'];
+		if( $location == 'widget' && $post_status == 'publish' ){
 			echo $before_widget;
 			echo ninja_annc_check($annc_id, true, false, $before_title, $after_title);
 			echo $after_widget;

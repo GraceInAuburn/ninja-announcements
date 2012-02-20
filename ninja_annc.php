@@ -4,7 +4,7 @@ Plugin Name: Ninja Announcements
 Plugin URI: http://wpninjas.net/
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: The WP Ninjas
-Version: 2.0
+Version: 2.1
 Author URI: http://wpninjas.net
 
 /*
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 define("NINJA_ANNC_DIR", WP_PLUGIN_DIR."/ninja-announcements");
 define("NINJA_ANNC_URL", WP_PLUGIN_URL."/ninja-announcements");
-define("NINJA_ANNC_VERSION", "2.0");
+define("NINJA_ANNC_VERSION", "2.1");
 define("NINJA_ANNC_TYPE", "Lite");
 
 function ninja_annc_load_lang() {
@@ -50,9 +50,18 @@ require_once(NINJA_ANNC_DIR."/includes/plugin-settings.php");
 if(NINJA_ANNC_TYPE == 'Pro'){
 	require_once(NINJA_ANNC_DIR."/includes/pro/groups.php");
 	require_once(NINJA_ANNC_DIR."/includes/pro/groups.widget.class.php");
+	add_filter( 'http_request_args', 'ninja_annc_ignore_repo', 5, 2 );
 }
 
-
+function ninja_annc_ignore_repo( $r, $url ) {
+	if ( 0 !== strpos( $url, 'http://api.wordpress.org/plugins/update-check' ) )
+		return $r; // Not a plugin update request. Bail immediately.
+	$plugins = unserialize( $r['body']['plugins'] );
+	unset( $plugins->plugins[ plugin_basename( __FILE__ ) ] );
+	unset( $plugins->active[ array_search( plugin_basename( __FILE__ ), $plugins->active ) ] );
+	$r['body']['plugins'] = serialize( $plugins );
+	return $r;
+}
 
 function change_publish_button( $translation, $text ) {
 	global $post;

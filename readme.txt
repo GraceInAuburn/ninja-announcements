@@ -4,7 +4,7 @@ Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 2.0
+Stable tag: 2.1
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
@@ -117,28 +117,33 @@ If you have any requests, please drop by the forums at http://wpninjas.net and t
 
 == Changelog ==
 
-= 1.0 =
-* First version of Ninja Announcements released.
+= 2.1 =
+* Removed Pro/Lite declaration in the Ninja Announcement menu so it stays on one line.
+* Removed the explicit menu position to remove conflicts with other plugins.
+* Add a check when location is a widget so that if inavtive the widget container won't be output.
+
+= 2.0 =
+* Completely reworked how Ninja Announcements works. 2.0 represents a much better version of the plugin overall.
+
+= 1.4 =
+*FIxed a major bug that prevented users from editing Ninja Announcements properly on WordPress 3.2.
+
+= 1.3 =
+*Fixed some major security holes within Ninja Announcements.
+
+= 1.2.3 =
+*Fixed a bug that prevented the link/unlick buttons from working on the editor.
+
+= 1.2.2 =
+* Fixed a major bug for some users that caused the announcement editor to appear as an all-white box.
+
+= 1.2 =
+* Fixed some minor bugs. One dealing with HTML validation and another with security issues.
 
 = 1.1 =
 * Added a "close" button to each announcement. This allows the user to close each for the rest of their browsing session
 * Inclusion of a shortcode allows you to easily place an announcement on a page or post. [ninja_annc id=3]
 * Added a new function for template designers that allows you to show all active announcements.
 
-= 1.2 =
-* Fixed some minor bugs. One dealing with HTML validation and another with security issues.
-
-= 1.2.2 =
-* Fixed a major bug for some users that caused the announcement editor to appear as an all-white box.
-
-= 1.2.3 =
-*Fixed a bug that prevented the link/unlick buttons from working on the editor.
-
-= 1.3 =
-*Fixed some major security holes within Ninja Announcements.
-
-= 1.4 =
-*FIxed a major bug that prevented users from editing Ninja Announcements properly on WordPress 3.2.
-
-= 2.0 =
-* Completely reworked how Ninja Announcements works. 2.0 represents a much better version of the plugin overall.
+= 1.0 =
+* First version of Ninja Announcements released.
