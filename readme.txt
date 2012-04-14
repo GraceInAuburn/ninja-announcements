@@ -4,15 +4,11 @@ Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 2.1
+Stable tag: 2.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
 == Description ==
-*Notice* - Version 2.0 represents a huge leap forward for Ninja Announcements. If you have not already, please update to this version.
-If you are upgrading from an earlier version of Ninja Announcements, we recommend that you deactivate the previous version and delete
-it before installing this version.
-
 As of Version 2.0, Ninja Announcements fully supports localization. If you are interesting in translating Ninja Announcements
 into a non-English language, please visit wpninjas.net and let us know so that we can include it in future versions.
 
@@ -116,6 +112,9 @@ We are contemplating adding many features to future versions of the Ninja Announ
 If you have any requests, please drop by the forums at http://wpninjas.net and tell us about them.
 
 == Changelog ==
+
+= 2.2 =
+* Added some lines to the POT file that were missed initially.
 
 = 2.1 =
 * Removed Pro/Lite declaration in the Ninja Announcement menu so it stays on one line.

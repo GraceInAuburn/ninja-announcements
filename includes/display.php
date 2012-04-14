@@ -1,4 +1,11 @@
 <?php
+add_action('init', 'ninja_annc_start_session');
+function ninja_annc_start_session(){
+	if(session_id() == '') {
+		session_start();
+	}
+}
+
 function ninja_annc_display_group($group_id){
 	$group = get_term($group_id, 'ninja_annc_groups');
 	$widget = false;
@@ -120,9 +127,6 @@ function ninja_annc_display_group_location($location){
 }
 
 function ninja_annc_display_annc_location($location, $widget = false){
-	if(session_id() == '') {
-		session_start();
-	}
 	$args = array(
     'offset'          => 0,
     'orderby'         => 'post_date',
@@ -497,9 +501,6 @@ function ninja_annc_check($id, $widget = false, $group = false, $before_title = 
 }
 
 function ninja_annc_output_display($id, $widget = false, $group = false, $before_title = false, $after_title = false){
-	if(session_id() == '') {
-		session_start();
-	}
 	if($widget){
 		$widget_class = 'widget-';
 	}else{

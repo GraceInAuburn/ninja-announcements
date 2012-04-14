@@ -16,8 +16,8 @@ function ninja_annc_edit_js(){
 			
 		if(version_compare( $wp_version, '3.2-Beta1' , '>')){	
 			//wp_enqueue_script('ninja_annc_admin_js',
-				//NINJA_ANNC_URL .'/js/dev/ninja_annc_admin.js',
-				//array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', false);	
+			//NINJA_ANNC_URL .'/js/dev/ninja_annc_admin.js',
+			//array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', false);	
 				
 			wp_enqueue_script('ninja_annc_admin_js',
 			NINJA_ANNC_URL .'/js/min/ninja_annc_admin.min.js',
@@ -41,6 +41,11 @@ function ninja_annc_edit_js(){
 		if(isset($post)){
 			wp_localize_script( 'ninja_annc_admin_js', 'settings', array( 'plugin_url' => NINJA_ANNC_URL,  'post_status' => $post->post_status) );
 		}
+		$activate = __('Activate', 'ninja-announcements');
+		$deactivate = __('Deactivate', 'ninja-announcements');
+		$save = __('Save', 'ninja-announcements');
+		
+		wp_localize_script( 'ninja_annc_admin_js', 'ninja_annc_strings', array( 'activate' => $activate,  'deactivate' => $deactivate, 'save' => $save) );
 		wp_enqueue_style( 'jquery-smoothness', NINJA_ANNC_URL .'/css/smoothness/jquery-smoothness.css');
 		wp_enqueue_style( 'token-input', NINJA_ANNC_URL .'/css/token-input.css');		
 		wp_enqueue_style( 'token-input-facebook-css', NINJA_ANNC_URL .'/css/token-input-facebook.css');
@@ -119,8 +124,11 @@ function ninja_annc_tax_js(){
 			NINJA_FORMS_URL .'/js/min/jquery.ui.datepicker.min.js',
 			array('jquery', 'jquery-ui-core'));	
 		}	
-			
-		wp_localize_script( 'ninja_annc_admin_js', 'settings', array( 'plugin_url' => NINJA_ANNC_URL) );
+		
+		$open = __('Open', 'ninja-announcements');
+		$close = __('Close', 'ninja-announcements');
+		
+		wp_localize_script( 'ninja_annc_admin_js', 'settings', array( 'plugin_url' => NINJA_ANNC_URL, 'ninja_annc_open' => $open, 'ninja_annc_close' => $close ) );
 		wp_enqueue_style( 'jquery-smoothness-css', NINJA_ANNC_URL .'/css/smoothness/jquery-smoothness.css');
 		wp_enqueue_style( 'token-input', NINJA_ANNC_URL .'/css/token-input.css');		
 	}
@@ -133,14 +141,17 @@ function ninja_annc_display_js(){
 		$default_style = $plugin_settings['default_style'];
 
 		//wp_enqueue_script('ninja_annc_display_js',
-			//NINJA_ANNC_URL .'/js/dev/ninja_annc_display.js',
-			//array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', false);					
+		//NINJA_ANNC_URL .'/js/dev/ninja_annc_display.js',
+		//array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', false);					
 			
 		wp_enqueue_script('ninja_annc_display_js',
 		NINJA_ANNC_URL .'/js/min/ninja_annc_display.min.js',
 		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', false);			
 
-		wp_localize_script( 'ninja_annc_display_js', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );			
+		$open = __('Open', 'ninja-announcements');
+		$close = __('Close', 'ninja-announcements');
+		
+		wp_localize_script( 'ninja_annc_display_js', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'ninja_annc_open' => $open, 'ninja_annc_close' => $close ) );			
 		if($default_style == 'checked'){
 			wp_enqueue_style( 'ninja-annc-display', NINJA_ANNC_URL .'/css/ninja-annc-display.css');
 		}

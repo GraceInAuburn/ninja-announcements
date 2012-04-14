@@ -168,11 +168,11 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: includes/display.php:556
+#: includes/display.php:556 includes/scripts-styles.php 143
 msgid "Open"
 msgstr ""
 
-#: includes/display.php:559
+#: includes/display.php:559 includes/scripts-styles.php: 144
 msgid "Close"
 msgstr ""
 
@@ -238,4 +238,8 @@ msgstr ""
 
 #: includes/columns.php:43
 msgid "Announcement controlled via group settings"
+msgstr ""
+
+#: includes/meta-boxes.php:418
+msgid "Days of the week"
 msgstr ""

@@ -4,7 +4,7 @@ function ninja_annc_cpt() {
 	register_post_type( 'ninja_annc',
 		array(
 			'labels' => array(
-				'name' => __( 'Ninja Announcements' , 'ninja-announcements' ),
+				'name' => __( 'Ninja Announcements' , 'ninja-announcements'),
 				'singular_name' => __( 'Announcement' , 'ninja-announcements'),
 				'not_found' => __('No Announcements Found', 'ninja-announcements'),
 				'new_item' => __('New Announcement', 'ninja-announcements'),
