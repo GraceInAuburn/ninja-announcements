@@ -87,7 +87,12 @@ function ninja_annc_widget_js(){
 		NINJA_FORMS_URL .'/js/min/jquery.ui.datepicker.min.js',
 		array('jquery', 'jquery-ui-core'));	
 	}
+	
+	$activate = __('Activate', 'ninja-announcements');
+	$deactivate = __('Deactivate', 'ninja-announcements');
+	$save = __('Save', 'ninja-announcements');
 		
+	wp_localize_script( 'ninja_annc_admin_js', 'ninja_annc_strings', array( 'activate' => $activate,  'deactivate' => $deactivate, 'save' => $save) );
 	wp_localize_script( 'ninja_annc_admin_js', 'settings', array( 'plugin_url' => NINJA_ANNC_URL) );
 	wp_enqueue_style( 'jquery-smoothness-css', NINJA_ANNC_URL .'/css/smoothness/jquery-smoothness.css');
 }

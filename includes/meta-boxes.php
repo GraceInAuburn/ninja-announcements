@@ -415,7 +415,7 @@ function ninja_annc_create_meta($post) {
 			'default' => $select_all_days,
 			'title' => __('Select All', 'ninja-announcements'),
 			'type' => 'checkbox',
-			'before' => '<h4>'.__('Days of the week').' &nbsp;&nbsp;',
+			'before' => '<h4>'.__('Days of the week', 'ninja-announcements').' &nbsp;&nbsp;',
 			'before_label' => '&nbsp;',
 			'after_label' => '',
 			'after' => '</h4>',
