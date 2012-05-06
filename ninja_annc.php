@@ -4,7 +4,7 @@ Plugin Name: Ninja Announcements
 Plugin URI: http://wpninjas.net/
 Description: A plugin that displays annoucements on pages and posts. They can be scheduled so that they are only displayed between specified dates/times. Additionally, all annoucements are edited via the built-in WordPress RTE. You can also include images and videos from your WordPress media library or YouTube. Each of your announcements has it's own location setting, allowing you to place the announcement exactly where you want it, even display it as a widget!
 Author: The WP Ninjas
-Version: 2.3
+Version: 2.3.1
 Author URI: http://wpninjas.net
 
 /*
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 define("NINJA_ANNC_DIR", WP_PLUGIN_DIR."/ninja-announcements");
 define("NINJA_ANNC_URL", WP_PLUGIN_URL."/ninja-announcements");
-define("NINJA_ANNC_VERSION", "2.3");
+define("NINJA_ANNC_VERSION", "2.3.1");
 define("NINJA_ANNC_TYPE", "Lite");
 
 add_action('init', 'ninja_annc_load_lang');
@@ -114,7 +114,7 @@ function ninja_annc_bulk() {
 }
 add_action('load-edit.php', 'ninja_annc_bulk');
 
-add_action('get_header', 'ninja_annc_header');
+add_action('wp_head', 'ninja_annc_header');
 function ninja_annc_header(){
 	//ninja_annc_update_groups();
 	//ninja_annc_update_annc();
