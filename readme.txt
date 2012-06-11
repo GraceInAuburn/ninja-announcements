@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.1
-Tested up to: 3.3.2
+Tested up to: 3.4
 Stable tag: 2.3.1
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
