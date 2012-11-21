@@ -4,7 +4,7 @@ Donate link: http://wpninjas.net
 Tags: announcement, alert, notice
 Requires at least: 3.1
 Tested up to: 3.4
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 
 This plugin lets you create announcements (text and/or media) that are displayed in various places of your WordPress installation.
 
@@ -116,6 +116,9 @@ We are contemplating adding many features to future versions of the Ninja Announ
 If you have any requests, please drop by the forums at http://wpninjas.net and tell us about them.
 
 == Changelog ==
+
+= 2.3.2 =
+* Fixed a long time bug with the default header location and Internet Explorer.
 
 = 2.3.1 =
 * fixed the automatic placement issue with IE browsers.
