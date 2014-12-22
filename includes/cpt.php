@@ -14,7 +14,7 @@ function ninja_annc_cpt() {
 		'public' => true,
 		'has_archive' => false,
 		'exclude_from_search' => true,
-		'menu_icon' => plugins_url( 'images/ninja_announc_icon.png' , dirname(__FILE__) ),
+		'menu_icon' => 'dashicons-flag',
 		)
 	);
 }
